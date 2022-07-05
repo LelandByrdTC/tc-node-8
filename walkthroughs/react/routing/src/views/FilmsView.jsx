@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { APIService } from "../services/API.service";
 import { Loading } from "../shared/Loading";
 
@@ -12,17 +13,6 @@ export const FilmsView = (props) => {
     setIsLoading(false);
   };
 
-  const getScoreColor = (score) => {
-    switch (true) {
-      case score >= 85:
-        return "success";
-      case score >= 70:
-        return "warning";
-      default:
-        return "danger";
-    }
-  };
-
   React.useEffect(() => {
     fetchFilms();
   }, []);
@@ -33,43 +23,16 @@ export const FilmsView = (props) => {
 
   return (
     <main className="my-4">
-      <h1>Films</h1>
-      <div className="form-group">
-        <input type="radio" name="sort" id="ascending" />
-        <label htmlFor="ascending">A-Z</label>
-        <input type="radio" name="sort" id="descending" />
-        <label htmlFor="descending">Z-A</label>
-        <input type="radio" name="sort" id="rt_score" />
-        <label htmlFor="rt_score">RT Score</label>
-      </div>
-      <div className="row p-4">
-        {films.map(
-          ({
-            id,
-            title,
-            description,
-            release_date,
-            original_title,
-            rt_score,
-          }) => (
-            <div key={id} className="card col-sm-4">
-              <div className="card-body">
-                <h3>{original_title}</h3>
-                <small>{title}</small>
-                <p>{description}</p>
-                <ul>
-                  <li>{release_date}</li>
-                  <li>
-                    <span className={`badge bg-${getScoreColor(rt_score)}`}>
-                      {rt_score}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          )
-        )}
-      </div>
+      <h1>Films {films.length}</h1>
+      <ul className="list-group">
+        {films.map(({ id, title, release_date }) => (
+          <li key={id} className="list-group-item">
+            <h3>{title}</h3>
+            <p>{release_date}</p>
+            <Link to={`${id}`}>View More</Link>
+          </li>
+        ))}
+      </ul>
     </main>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { APIService } from "../services/API.service";
 
 export const PeopleView = (props) => {
@@ -15,15 +16,12 @@ export const PeopleView = (props) => {
 
   return (
     <main>
-      <h1>People</h1>
+      <h1>People {people.length}</h1>
       <div className="container">
-        {people.map(({ id, name, gender, age }) => (
+        {people.map(({ id, name }) => (
           <div key={id} className="card">
             <h3>{name}</h3>
-            <ul>
-              <li>{gender}</li>
-              <li>{age}</li>
-            </ul>
+            <Link to={`${id}`}>View More</Link>
           </div>
         ))}
       </div>

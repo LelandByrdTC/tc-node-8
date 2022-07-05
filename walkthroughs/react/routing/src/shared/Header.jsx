@@ -7,18 +7,22 @@ export const Header = () => {
       <nav className="navbar navbar-expand-lg">
         <ul className="navbar-nav">
           {routes.map((route, idx) => {
-            return (
-              <li key={idx} className="nav-item">
-                <NavLink
-                  className={({ isActive }) =>
-                    `nav-link text-light ${isActive ? "active text-dark" : ""}`
-                  }
-                  to={route.path}
-                >
-                  {route.title}
-                </NavLink>
-              </li>
-            );
+            if (route.isNavLink)
+              return (
+                <li key={idx} className="nav-item">
+                  <NavLink
+                    className={({ isActive }) =>
+                      `nav-link text-light ${
+                        isActive ? "active text-dark" : ""
+                      }`
+                    }
+                    to={route.path}
+                  >
+                    {route.title}
+                  </NavLink>
+                </li>
+              );
+            else return null;
           })}
         </ul>
       </nav>
