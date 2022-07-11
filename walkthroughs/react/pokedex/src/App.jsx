@@ -8,6 +8,7 @@ const App = () => {
   const [searchName, setSearchName] = useState("");
   const [searchType, setSearchType] = useState("");
   const [searchWeakness, setSearchWeakness] = useState("");
+  const [limit, setLimit] = useState(5);
 
   const { types, weaknesses } = useTypesAndWeaknesses(pokemonList);
 
@@ -29,7 +30,8 @@ const App = () => {
     pokemonList,
     searchName,
     searchType,
-    searchWeakness
+    searchWeakness,
+    limit
   );
 
   if (isLoading) return <h1>Loading...</h1>;
@@ -74,12 +76,26 @@ const App = () => {
           );
         })}
       </select>
+      <select
+        name="limit"
+        id="limit"
+        value={limit}
+        onChange={(e) => setLimit(e.target.value)}
+      >
+        {[5, 10, 15, 20, 25, 50, pokemonList.length].map((l, idx) => {
+          return (
+            <option key={idx} value={l}>
+              {l == pokemonList.length ? "All" : l}
+            </option>
+          );
+        })}
+      </select>
       <div>
         {displayList.map((pokemon) => {
           return (
             <div key={pokemon.id}>
               <h3>{pokemon.name}</h3>
-              <small>{pokemon.num}</small>
+              <small>{pokemon.match}</small>
               <p>Type:</p>
               <ul>
                 {pokemon.type.map((t, idx) => (

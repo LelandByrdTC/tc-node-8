@@ -28,7 +28,7 @@ const compareMatch = (refName, searchName) => {
 
   for (let char of searchName) {
     if (tempRefName.toLowerCase().includes(char)) {
-      res += tempRefName.indexOf(char) == searchName.indexOf(char) ? 3 : 1;
+      res += tempRefName.indexOf(char) == searchName.indexOf(char) ? 1 : 0.5;
       tempRefName = tempRefName.replace(char, " ");
     }
   }
@@ -36,7 +36,7 @@ const compareMatch = (refName, searchName) => {
   return res;
 };
 
-export const filterPokemon = (list, searchName, searchType, searchWeakness) => {
+export const filterPokemon = (list, searchName, searchType, searchWeakness, limit) => {
   let filteredList = list.filter((pokemon) => {
     let compareScore = compareMatch(pokemon.name, searchName);
 
@@ -47,6 +47,8 @@ export const filterPokemon = (list, searchName, searchType, searchWeakness) => {
     ) {
       pokemon.match = compareScore;
       return true;
+    } else {
+      return false;
     }
   });
 
@@ -58,5 +60,5 @@ export const filterPokemon = (list, searchName, searchType, searchWeakness) => {
     }
   });
 
-  return filteredList;
+  return filteredList.slice(0, limit);
 };
