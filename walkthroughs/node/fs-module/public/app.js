@@ -1,0 +1,1 @@
+console.log("Success loaded script asset")
