@@ -15,14 +15,26 @@ class Shelf {
     this.books.push(book);
   }
 
-  find(title) {}
+  find(title) {
+    return this.books.find((book) => book.title == title)
+  }
 
-  remove() {}
+  remove(title) {
+    return this.books.splice(this.books.findIndex((book) => book.title == title), 1)
+  }
 }
 
 class Bookcase {
   constructor(size) {
     this.shelves = new Array(size).fill(new Shelf());
+  }
+  
+  addShelf() {
+    this.shelves.push(new Shelf()); 
+  }
+  
+  selectShelf(shelfNumber) {
+    return this.shelves[shelfNumber - 1];
   }
 }
 
