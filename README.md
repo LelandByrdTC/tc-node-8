@@ -16,6 +16,4 @@ There will be contributing instructions and assignments listed on the [contribut
 
 For any questions, issues, feedback or new ideas, please contact us in Discord:
 
-- [Ben Bryant](https://github.com/Bryantellius)
-- [Seth Bowman](https://github.com/SethBowman)
-- [Cameron Hardy](https://github.com/CameronHardy9)
+
